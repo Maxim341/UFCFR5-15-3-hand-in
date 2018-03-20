@@ -112,13 +112,13 @@ foreach ($result as $single){
 //drops the new keyword and wraps the remaining expression in quotation marks:
 ################################################################
 
-  $dateFormatted = "Date(";
-  $dateFormatted .= date("Y", $date->format("U")).", ";
-  $dateFormatted .= (date("m", $date->format("U"))-1).", ";
-  $dateFormatted .= date("d", $date->format("U")).", ";
-  $dateFormatted .= date("H", $date->format("U")).", ";
-  $dateFormatted .= date("i", $date->format("U")).", ";
-  $dateFormatted .= date("s", $date->format("U")).")";
+$dateFormatted = "Date("
+. date("Y", $date->format("U")).", "
+.(date("m", $date->format("U"))-1).", "
+. date("d", $date->format("U")).", "
+. date("H", $date->format("U")).", "
+. date("i", $date->format("U")).", "
+. date("s", $date->format("U")).")";
 
   $temp = array();
   $temp[] = array("v" => $dateFormatted); //add value
