@@ -8,7 +8,7 @@
 | Initial PHP script to extract CSV data and subsequent XML files   | [link](https://github.com/Maxim341/UFCFR5-15-3-hand-in/tree/master/Tasks/Task%201/initial%20XML%20and%20php%20script) |
 | PHP script to produce no2 files     | [link](https://github.com/Maxim341/UFCFR5-15-3-hand-in/blob/master/Tasks/Task%201/produce_no2.php)      |
 | Final no2 XML files | [link](https://github.com/Maxim341/UFCFR5-15-3-hand-in/tree/master/Tasks/Task%201/output%20XML)      |
-| Chart 1               |    [link](https://github.com/Maxim341/UFCFR5-15-3-hand-in/tree/master/Tasks/Task%202/Chart%201)         |
+| Chart 1              |    [link](https://github.com/Maxim341/UFCFR5-15-3-hand-in/tree/master/Tasks/Task%202/Chart%201)         |
 |Chart 2   |  [link](https://github.com/Maxim341/UFCFR5-15-3-hand-in/tree/master/Tasks/Task%202/Chart%202) |
 
 
