@@ -39,7 +39,7 @@ This data would then be visualised in a suitable way using the Google Charts API
 
 
 <p align="center">
-<img src="chart1.png">
+<img src="colourScatter.png">
 </p>
 
 **Figure 2** *Example of Chart made using Google Chart API.*
