@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>
+      Nitrogen Dioxide levels.
+    </title>
+
+    <style>
+    <style>
+
+        form {
+        margin: 0 auto;
+        width:130px;
+        }
+
+        html {
+          width: 100%;
+          height: 100%;
+        }
+
+        body {
+          background: -webkit-linear-gradient(45deg, rgba(66, 183, 245, 0.8) 0%, rgba(66, 245, 189, 0.4) 100%);
+          background: linear-gradient(45deg, rgba(66, 183, 245, 0.8) 0%, rgba(66, 245, 189, 0.4) 100%);
+          color: rgba(0, 0, 0, 0.6);
+          font-family: "Roboto", sans-serif;
+          font-size: 14px;
+          line-height: 1.6em;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+
+    </style>
+
+  </head>
+  <body>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script id = "testing" type="text/javascript">
+
+    /***************************************************************************
+    showGraph()
+      - funtion to load the visualization API and package needed for scatter graph.
+      - Also contains ajax call to get information from php script.
+
+    */
+
+    function showGraph() {
+        // Load the Visualization API and the piechart package.
+        google.charts.load('current', {'packages': ['corechart']});
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+          //get location file using JQuery
+          var locationFile = $("#location").val();
+          //get selected location input using JQuery
+          var location = $("#location :selected").text();
+          //get time input using JQuery
+          var time = $("#time").val();
+          //get date input using JQuery
+          var date = $("#date").val();
+
+          //use ajax to serialize data.
+          var jsonData = $.ajax({
+            url: "createLineChart.php",
+            data: {
+              time: time,
+              location: locationFile,
+              date: date
+            },
+
+            dataType: "json",
+            async: false
+          }).responseText;
+
+
+          // Create our data table out of JSON data loaded from server.
+          var data = new google.visualization.DataTable(jsonData)
+
+          //check if table is populated.
+          if (data.getNumberOfRows() === 0) {
+            document.getElementById("demo").innerHTML = "Sorry, we have no data for this date :-(";
+          }
+          else{
+            document.getElementById("demo").innerHTML = "";
+          }
+
+
+
+
+
+            var yearText = document.getElementById("date");
+              //get correct parts of date to show in the graph title.
+            var matchyear = date.match(/(.*)-.*-.*/);
+            var matchmonth = date.match(/.*-(.*)-.*/);
+            var matchday = date.match(/.*-.*-(.*)/);
+
+            var finaldate = matchday[1] + "/" + matchmonth[1] + "/" + matchyear[1]
+
+
+            //Add 1 day to finaldate
+            //https://stackoverflow.com/questions/24312296/add-one-day-to-date-in-javascript/24312386
+            //https://stackoverflow.com/questions/12409299/how-to-get-current-formatted-date-dd-mm-yyyy-in-javascript-and-append-it-to-an-i
+
+            var d = matchyear[1] +"-" + matchmonth[1]+"-"+matchday[1];
+            console.log(d);
+            var startDate = new Date(d)
+
+            // seconds * minutes * hours * milliseconds = 1 day
+            var day = 60 * 60 * 24 * 1000;
+
+            var endDate = new Date(startDate.getTime() + day);
+
+            var dd = endDate.getDate();
+            var mm = endDate.getMonth()+1; //January is 0!
+
+            var yyyy = endDate.getFullYear();
+            if(dd<10){
+              dd='0'+dd;
+            }
+            if(mm<10){
+              mm='0'+mm;
+            }
+            var finalEndDate = dd+'/'+mm+'/'+yyyy;
+            console.log(finalEndDate);
+
+
+
+
+          //add title and gridlines to display the data aesthetically.
+          /***************************************************************************
+          code below inspiration from:
+            - https://developers.google.com/chart/interactive/docs/datesandtimes
+
+
+          */
+          var options = {
+               pointSize: 3,
+        colors: ['#e0440e'],
+            title: "Nitrogen Dioxide levels between " + time + " " + finaldate + " and "  + time+ " " + finalEndDate + " in " + location,
+
+            hAxis: {
+              gridlines: {
+                count: -1,
+                units: {
+                  days: {format: ["dd MMM"]},
+                  hours: {format: ["HH:mm", 'ha']}
+                }
+              },
+              minorGridlines: {
+                units: {
+                  hours: {format: ["hh:mm:ss a", "ha"]},
+                  minutes: {format: ["HH:mm a Z", ":mm"]}
+                }
+              }
+            }
+
+          }
+
+          var chart = new google.visualization.LineChart(document.getElementById("chart_div"));
+          chart.draw(data, options);
+
+        }
+      }
+    </script>
+    <!-- div to hold charts -->
+    <div id="chart_div"></div>
+    <h1 id="demo" style="text-align:center"></h1>
+    <br>
+    <br>
+
+
+    <!--INPUT------------------------------------------------------------------------------------------------------------------>
+
+
+    <h2 style="text-align:center">Please select a time period, location and date </h2>
+    <br>
+
+      <!--https://stackoverflow.com/questions/10520899/form-action-with-javascript/34467977#34467977------------------->
+  <form style="text-align:center" id = "form" action="javascript:;" onchange="showGraph()">
+    <div id="hours"></div>
+    <script>
+    $(document).ready(function () {
+      var div = document.getElementById("hours");
+      //add select into div
+      var select = document.createElement("select");
+      //add id time
+      select.id = "time";
+      div.appendChild(select);
+      //add options
+      var i = 0;
+      while (i <= 23.75) {
+        //calc the string for hours (HH:MM:SS)
+        //minutes
+        var minutes = i - Math.floor(i);
+        minutes *= 60;
+        minutes = minutes === 0 ? "00" : "" + minutes;
+        //hours
+        var hours = (i < 10 ? "0" : "") + Math.floor(i);
+        //update html of timer
+        var string = hours + ":" + minutes + ":00";
+        //create option
+        var option = document.createElement("option");
+        option.value = string;
+        option.text = string;
+        //append option
+        select.appendChild(option);
+        i += 0.25;
+      }
+    });
+    </script>
+
+
+
+      <select name = "location" id="location" onchange="showGraph()">
+        <option value="brislington_no2.xml">Brislington</option>
+        <option value="fishponds_no2.xml" selected="selected">Fishponds</option>
+        <option value="parson_st_no2.xml">Parson Street</option>
+        <option value="rupert_st_no2.xml">Rupert Street</option>
+        <option value="wells_rd_no2.xml">Wells Road</option>
+        <option value="newfoundland_way_no2.xml">Newfoundland Way</option>
+      </select>
+<br>
+      <input type="date" name = "date" id="date" value="2016-07-01" onchange="showGraph()"/>
+<br>
+
+
+
+      <input onclick="showGraph()" type="submit" value="Show Graph" >
+
+    </form>
+    </p>
+
+
+
+  </body>
+</html>

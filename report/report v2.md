@@ -5,8 +5,9 @@
 
 | Item          | Link          |
 | ------------- |:-------------:|
-| Task 1 | [link](https://github.com/Maxim341/UFCFR5-15-3-hand-in/tree/master/Tasks/Task%201) |
-| task 2   | [link](https://github.com/Maxim341/UFCFR5-15-3-hand-in/tree/master/Tasks/Task%202)      |
+| Graph 1 visualisation | [link](http://www.cems.uwe.ac.uk/~m2-nethercott/UFCFR5-15-3-hand-in/Tasks/Task%202/Chart%201/scatterChart.html) |
+| Graph 2 visualisation  | [link](http://www.cems.uwe.ac.uk/~m2-nethercott/UFCFR5-15-3-hand-in/Tasks/Task%202/Chart%202/lineChart.html)   |
+|Task 1 on UWE server   | [link](http://www.cems.uwe.ac.uk/~m2-nethercott/UFCFR5-15-3-hand-in/Tasks/Task%201/)  |
 
 
 

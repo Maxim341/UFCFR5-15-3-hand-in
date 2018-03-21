@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>
+      Nitrogen Dioxide levels.
+    </title>
+
+<style>
+
+    form {
+    margin: 0 auto;
+    width:130px;
+    }
+
+    html {
+      width: 100%;
+      height: 100%;
+    }
+
+    body {
+      background: -webkit-linear-gradient(45deg, rgba(66, 183, 245, 0.8) 0%, rgba(66, 245, 189, 0.4) 100%);
+      background: linear-gradient(45deg, rgba(66, 183, 245, 0.8) 0%, rgba(66, 245, 189, 0.4) 100%);
+      color: rgba(0, 0, 0, 0.6);
+      font-family: "Roboto", sans-serif;
+      font-size: 14px;
+      line-height: 1.6em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+</style>
+
+  </head>
+  <body>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script id = "testing" type="text/javascript">
+
+    /***************************************************************************
+    showGraph()
+      - funtion to load the visualization API and package needed for scatter graph.
+      - Also contains ajax call to get information from php script.
+
+    */
+
+    function showGraph() {
+        // Load the Visualization API and the piechart package.
+        google.charts.load('current', {'packages': ['corechart']});
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+          var jsonData = $.ajax({
+            url: "createScatter.php",
+            data: $("form").serialize(),
+            dataType: "json",
+            async: false
+          }).responseText;
+
+
+          // Create our data table out of JSON data loaded from server.
+          var data = new google.visualization.DataTable(jsonData)
+
+
+          //check if table is populated.
+          if (data.getNumberOfRows() === 0) {
+            document.getElementById("demo").innerHTML = "Sorry, we have no data for this date :-(";
+          }
+          else{
+            document.getElementById("demo").innerHTML = "";
+          }
+
+            //get required data to show on graph title
+            var yearText = document.getElementById("date");
+            var locationText = document.getElementById("location");
+            var location = locationText.options[locationText.selectedIndex].text;
+            var date = yearText.options[yearText.selectedIndex].text;
+
+            //add grid lines
+          var options = {
+            title: "Nitrogen Dioxide levels at 8AM in " + location + " throughout " + date,
+            hAxis: {
+              gridlines: {
+                count: -1,
+                units: {
+                  days: {format: ["dd MMM"]},
+                  hours: {format: ["HH:mm", 'ha']}
+                }
+              },
+              minorGridlines: {
+                units: {
+                  hours: {format: ["hh:mm:ss a", "ha"]},
+                  minutes: {format: ["HH:mm a Z", ":mm"]}
+                }
+              }
+            }
+          }
+          //instantiate and draw chart
+          var chart = new google.visualization.ScatterChart(document.getElementById("chart_div"));
+          chart.draw(data, options);
+
+        }
+      }
+    </script>
+    <!-- div to hold charts -->
+    <div id="chart_div"></div>
+    <h1 id="demo" style="text-align:center"></h1>
+    <br>
+    <br>
+
+
+    <!--INPUT------------------------------------------------------------------------------------------------------------------>
+
+
+    <h2 style="text-align:center">Please select a date and location </h2>
+    <br>
+
+
+      <!--https://stackoverflow.com/questions/10520899/form-action-with-javascript/34467977#34467977------------------->
+  <form id = "form" action="javascript:;" onchange="showGraph()">
+      <select  name = "date" id="date">
+        <option value="2014">2014</option>
+        <option value="2015">2015</option>
+        <option value="2016" selected="selected">2016</option>
+        <option value="2017">2017</option>
+      </select>
+
+      <select name = "location" id="location" onchange="showGraph()">
+        <option value="brislington_no2.xml">Brislington</option>
+        <option value="fishponds_no2.xml" selected="selected">Fishponds</option>
+        <option value="parson_st_no2.xml">Parson Street</option>
+        <option value="rupert_st_no2.xml">Rupert Street</option>
+        <option value="wells_rd_no2.xml">Wells Road</option>
+        <option value="newfoundland_way_no2.xml">Newfoundland Way</option>
+      </select>
+
+      <input onclick="showGraph()" type="submit" value="Show Graph" >
+
+    </form>
+    </p>
+
+  </body>
+</html>
