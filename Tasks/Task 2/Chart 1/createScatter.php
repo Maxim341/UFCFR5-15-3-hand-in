@@ -7,7 +7,7 @@ if (isset($_GET['date'])) {
 
 
 //load required xml.
-$xml = simplexml_load_file("$getLocation");
+$xml = simplexml_load_file("../../Task 1/output XML/".$getLocation);
 
 //Xpath. Source helped with this: https://devhints.io/xpath
 //getting reading at 8am.
@@ -64,13 +64,13 @@ foreach ($result as $single){
 //drops the new keyword and wraps the remaining expression in quotation marks:
 ################################################################
 
-$dateFormatted = "Date("
-. date("Y", $date->format("U")).", "
-.(date("m", $date->format("U"))-1).", "
-. date("d", $date->format("U")).", "
-. date("H", $date->format("U")).", "
-. date("i", $date->format("U")).", "
-. date("s", $date->format("U")).")";
+  $dateFormatted = "Date("
+  . date("Y", $date->format("U")).", "
+  .(date("m", $date->format("U"))-1).", "
+  . date("d", $date->format("U")).", "
+  . date("H", $date->format("U")).", "
+  . date("i", $date->format("U")).", "
+  . date("s", $date->format("U")).")";
 
 
   //Syntax for associative arrays:

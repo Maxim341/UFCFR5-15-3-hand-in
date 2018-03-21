@@ -55,9 +55,24 @@
         google.charts.setOnLoadCallback(drawChart);
 
         function drawChart() {
+          //get location file using JQuery
+          var locationFile = $("#location").val();
+          //get selected location input using JQuery
+          var location = $("#location :selected").text();
+          //get time input using JQuery
+          var time = $("#time").val();
+          //get date input using JQuery
+          var date = $("#date").val();
+
+          //use ajax to serialize data.
           var jsonData = $.ajax({
             url: "createLineChart.php",
-            data: $("form").serialize(),
+            data: {
+              time: time,
+              location: locationFile,
+              date: date
+            },
+
             dataType: "json",
             async: false
           }).responseText;
@@ -79,19 +94,7 @@
 
 
             var yearText = document.getElementById("date");
-
-            var locationText = document.getElementById("location");
-
-            var location = locationText.options[locationText.selectedIndex].text;
-
-            var timeText = document.getElementById("time");
-
-
-            var time = timeText.options[timeText.selectedIndex].text;
-
-
-            var date = document.getElementById("date").value;
-
+              //get correct parts of date to show in the graph title.
             var matchyear = date.match(/(.*)-.*-.*/);
             var matchmonth = date.match(/.*-(.*)-.*/);
             var matchday = date.match(/.*-.*-(.*)/);
@@ -136,6 +139,7 @@
 
           */
           var options = {
+               pointSize: 3,
         colors: ['#e0440e'],
             title: "Nitrogen Dioxide levels between " + time + " " + finaldate + " and "  + time+ " " + finalEndDate + " in " + location,
 
@@ -178,33 +182,40 @@
 
       <!--https://stackoverflow.com/questions/10520899/form-action-with-javascript/34467977#34467977------------------->
   <form style="text-align:center" id = "form" action="javascript:;" onchange="showGraph()">
-    <select name = "time" id="time" onchange="showGraph()">
-      <option value="00:00:00">12 am</option>
-      <option value="01:00:00">1 am</option>
-      <option value="02:00:00">2 am</option>
-      <option value="03:00:00">3 am</option>
-      <option value="04:00:00">4 am</option>
-      <option value="05:00:00">5 am</option>
-      <option value="06:00:00">6 am</option>
-      <option value="07:00:00">7 am</option>
-      <option value="08:00:00">8 am</option>
-      <option value="09:00:00">9 am </option>
-      <option value="10:00:00" selected="selected">10 am</option>
-      <option value="11:00:00">11 am </option>
-      <option value="12:00:00">12 pm </option>
-      <option value="13:00:00">1 pm </option>
-      <option value="14:00:00">2 pm </option>
-      <option value="15:00:00">3 pm </option>
-      <option value="16:00:00">4 pm </option>
-      <option value="17:00:00">5 pm </option>
-      <option value="18:00:00">6 pm </option>
-      <option value="19:00:00">7 pm </option>
-      <option value="20:00:00">8 pm </option>
-      <option value="21:00:00">9 pm </option>
-      <option value="22:00:00">10 pm </option>
-      <option value="23:00:00">11 pm </option>
-    </select>
-<br>
+    <div id="hours"></div>
+    <script>
+    $(document).ready(function () {
+      var div = document.getElementById("hours");
+      //add select into div
+      var select = document.createElement("select");
+      //add id time
+      select.id = "time";
+      div.appendChild(select);
+      //add options
+      var i = 0;
+      while (i <= 23.75) {
+        //calc the string for hours (HH:MM:SS)
+        //minutes
+        var minutes = i - Math.floor(i);
+        minutes *= 60;
+        minutes = minutes === 0 ? "00" : "" + minutes;
+        //hours
+        var hours = (i < 10 ? "0" : "") + Math.floor(i);
+        //update html of timer
+        var string = hours + ":" + minutes + ":00";
+        //create option
+        var option = document.createElement("option");
+        option.value = string;
+        option.text = string;
+        //append option
+        select.appendChild(option);
+        i += 0.25;
+      }
+    });
+    </script>
+
+
+
       <select name = "location" id="location" onchange="showGraph()">
         <option value="brislington_no2.xml">Brislington</option>
         <option value="fishponds_no2.xml" selected="selected">Fishponds</option>

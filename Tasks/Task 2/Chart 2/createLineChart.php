@@ -8,7 +8,7 @@ if (isset($_GET['date'])) {
 
 
 //load required xml.
-$xml = simplexml_load_file("$getLocation");
+$xml = simplexml_load_file($getLocation);
 
 
 
@@ -59,7 +59,7 @@ $result = $xml->xpath("//reading[(@date='$startDate' and translate(@time, ':', '
 //need to sort array
 //The comparison function must return an integer less than, equal to, or greater than zero if the first argument
 //is considered to be respectively less than, equal to, or greater than the second.
-usort($result, 'sortSimpleXMLElementByDateTime');
+usort($result, 'sortDates');
 
 
 
@@ -140,9 +140,17 @@ echo $finalTable;
 }
 
 ######################################################################################################################
-//returns -1 if the first date is smaller than the second, 0 if equals and 1 if its bigger
-
-function sortSimpleXMLElementByDateTime($a, $b) {
+/**
+ *
+ * sort dates in ascending order
+ *
+ * @param    String date1
+ * @param    String date2
+ * @return   1 if the first date is smaller than the second, 0 if equals and 1 if its bigger
+ *
+ */
+function sortDates($a, $b) {
+  // Interprets a string of XML into an object
   $reading1 = simplexml_load_string($a->asXML());
   $reading2 = simplexml_load_string($b->asXML());
 
