@@ -3,11 +3,19 @@
 
 #### Links to XML, HTML and PHP source code:
 
-| Item          | Link          |
+| Code          | Link          |
 | ------------- |:-------------:|
-| Graph 1 visualisation | [link](http://www.cems.uwe.ac.uk/~m2-nethercott/UFCFR5-15-3-hand-in/Tasks/Task%202/Chart%201/scatterChart.html) |
-| Graph 2 visualisation  | [link](http://www.cems.uwe.ac.uk/~m2-nethercott/UFCFR5-15-3-hand-in/Tasks/Task%202/Chart%202/lineChart.html)   |
+| Chart 1 visualisation on UWE server | [link](http://www.cems.uwe.ac.uk/~m2-nethercott/UFCFR5-15-3-hand-in/Tasks/Task%202/Chart%201/scatterChart.html) |
+| Chart 2 visualisation on UWE server | [link](http://www.cems.uwe.ac.uk/~m2-nethercott/UFCFR5-15-3-hand-in/Tasks/Task%202/Chart%202/lineChart.html)   |
 |Task 1 on UWE server   | [link](http://www.cems.uwe.ac.uk/~m2-nethercott/UFCFR5-15-3-hand-in/Tasks/Task%201/)  |
+|Task 1 source code on GitHub for easy viewing   |  [link](https://github.com/Maxim341/UFCFR5-15-3-hand-in/tree/master/Tasks/Task%201/task%201%20scripts) |
+| Chart 1 source code on GitHub for easy viewing  | [link](https://github.com/Maxim341/UFCFR5-15-3-hand-in/tree/master/Tasks/Task%202/Chart%201/code)  |
+|Chart 2 source code on GitHub for easy viewing |  [link](https://github.com/Maxim341/UFCFR5-15-3-hand-in/tree/master/Tasks/Task%202/Chart%202/code) |
+
+| XML          | Link          |
+| ------------- |:-------------:|
+| Initial XML | [link](https://github.com/Maxim341/UFCFR5-15-3-hand-in/tree/master/Tasks/Task%201/input%20XML) |
+| Final XML  | [link](https://github.com/Maxim341/UFCFR5-15-3-hand-in/tree/master/Tasks/Task%201/output%20XML)   |
 
 
 
@@ -92,7 +100,7 @@ Chart 1 was extended by adding colour to the plots to represent the severity of 
 
 Asynchronous JavaScript and XML was used to send and retrieve the required information to and from a PHP script and thus use it to create both graphs 1 and 2.
 
-To capture the user, input HTML forms were used with the ```onchange``` event attribute, which then calls a javascript method containing the AJAX call. jQuery ```serialize()``` method was incorporated in the AJAX call. This creates a URL encoded text string by serialising form values. The serialised values can be used in the URL query string when making an AJAX request.
+To capture the user input, HTML forms were used with the ```onchange``` event attribute, which then calls a javascript method containing the AJAX call. jQuery ```serialize()``` method was incorporated in the AJAX call. This creates a URL encoded text string by serialising form values. The serialised values can be used in the URL query string when making an AJAX request.
 
 
 
