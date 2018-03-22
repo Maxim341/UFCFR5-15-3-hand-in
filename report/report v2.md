@@ -3,12 +3,15 @@
 
 #### Links to XML, HTML and PHP source code:
 
+| Visualisation          | Link          |
+| ------------- |:-------------:|
+| Chart 1  | [link](http://www.cems.uwe.ac.uk/~m2-nethercott/UFCFR5-15-3-hand-in/Tasks/Task%202/Chart%201/scatterChart.html) |
+| Chart 2  | [link](http://www.cems.uwe.ac.uk/~m2-nethercott/UFCFR5-15-3-hand-in/Tasks/Task%202/Chart%202/lineChart.html)    |
+
 | Code          | Link          |
 | ------------- |:-------------:|
-| Chart 1 visualisation on UWE server | [link](http://www.cems.uwe.ac.uk/~m2-nethercott/UFCFR5-15-3-hand-in/Tasks/Task%202/Chart%201/scatterChart.html) |
-| Chart 2 visualisation on UWE server | [link](http://www.cems.uwe.ac.uk/~m2-nethercott/UFCFR5-15-3-hand-in/Tasks/Task%202/Chart%202/lineChart.html)   |
-|Task 1 on UWE server   | [link](http://www.cems.uwe.ac.uk/~m2-nethercott/UFCFR5-15-3-hand-in/Tasks/Task%201/)  |
-|Task 1 source code on GitHub for easy viewing   |  [link](https://github.com/Maxim341/UFCFR5-15-3-hand-in/tree/master/Tasks/Task%201/task%201%20scripts) |
+| Task 1 on UWE server   | [link](http://www.cems.uwe.ac.uk/~m2-nethercott/UFCFR5-15-3-hand-in/Tasks/Task%201/)  |
+| Task 1 source code on GitHub for easy viewing   |  [link](https://github.com/Maxim341/UFCFR5-15-3-hand-in/tree/master/Tasks/Task%201/task%201%20scripts) |
 | Chart 1 source code on GitHub for easy viewing  | [link](https://github.com/Maxim341/UFCFR5-15-3-hand-in/tree/master/Tasks/Task%202/Chart%201/code)  |
 |Chart 2 source code on GitHub for easy viewing |  [link](https://github.com/Maxim341/UFCFR5-15-3-hand-in/tree/master/Tasks/Task%202/Chart%202/code) |
 
