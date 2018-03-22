@@ -99,10 +99,14 @@ echo $finalTable;
 
 
 ######################################################################################################################
-//colur function takes in value and decides on colour.
-//Colours relate to The colour coding on the DEFRA Site
-//returns a hexidecimal colour code string.
-
+/**
+ *
+ * Identifies colour value for plot using colour code from DEFRA site.
+ *
+ * @param    int value
+ * @return   returns a hexidecimal colour code string.
+ *
+ */
 
 function colour($val) {
   if($val >= 0 && $val <=67) {
